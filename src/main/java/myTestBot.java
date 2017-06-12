@@ -10,9 +10,14 @@ public class myTestBot extends TelegramLongPollingBot {
 
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            SendMessage message = new SendMessage() // Create a SendMessage object with mandatory fields
-                    .setChatId(update.getMessage().getChatId())
-                    .setText(update.getMessage().getText());
+            SendMessage message = new SendMessage();
+            if (update.getMessage().getText().equals("go!")){
+                message.setChatId(update.getMessage().getChatId())
+                        .setText("Натааааашенькааааа :) Бусь!");
+            } else {
+                message.setChatId(update.getMessage().getChatId())
+                        .setText("?");
+            }
             try {
                 sendMessage(message); // Call method to send the message
             } catch (TelegramApiException ex) {
